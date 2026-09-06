@@ -954,7 +954,9 @@ public class Forge implements ApplicationListener {
     }
 
     public static void delayedSwitchBack(String title, String message) {
-        SaveLoadScene.instance().showMessage(title, message);
+        // check if currentScene is SaveLoadScene
+        if (currentScene instanceof SaveLoadScene saveLoadScene)
+            saveLoadScene.showMessage(title, message);
         FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             clearTransitionScreen();
             clearCurrentScreen();
